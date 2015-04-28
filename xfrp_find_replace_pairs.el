@@ -3,7 +3,7 @@
 ;; Copyright © 2010-2015, by Xah Lee
 
 ;; Author: Xah Lee ( http://xahlee.org/ )
-;; Version: 2.0.0
+;; Version: 2.0.1
 ;; Created: 17 Aug 2010
 ;; Keywords: lisp, string, tools
 ;; Homepage: http://ergoemacs.org/emacs/elisp_replace_string_region.html
@@ -50,9 +50,7 @@ The find strings are not case sensitive. If you want case sensitive, set `case-f
 
 The replacement are literal and case sensitive.
 
-Once a subsring in the input string is replaced, that part will not change again.  For example, if the input string is “abcd”, and the φpairs are a → c and c → d, then, result is “cbdd”, not “dbdd”. If you simply want repeated replacements, use `xah-replace-pairs-in-string-recursive'.
-
-Same as `xah-replace-pairs-in-string' except does on a region.
+Once a subsring in the buffer is replaced, that part will not change again.  For example, if the buffer content is “abcd”, and the φpairs are a → c and c → d, then, result is “cbdd”, not “dbdd”.
 
 Note: the region's text or any string in φpairs is assumed to NOT to contain any character from Unicode Private Use Area A. That is, U+F0000 to U+FFFFD. And, there are no more than 65534 pairs."
   (let (
@@ -108,8 +106,7 @@ The second argument φpairs should be a sequence of pairs, e.g.
 
 If third arg φfixedcase-p is non-nil, do not alter case of replacement text. (same as in `replace-match')
 
-If you want the regex to be case sensitive, set the global
-variable `case-fold-search' to “nil”. Like this: (let ((case-fold-search nil)) (xah-replace-regexp-pairs-in-string …))
+If you want the regex to be case sensitive, set the global variable `case-fold-search' to “nil”. Like this: (let ((case-fold-search nil)) (xah-replace-regexp-pairs-in-string …))
 
 This function calls `replace-regexp-in-string' repeatedly do the work.
 
@@ -133,8 +130,7 @@ See also `xah-replace-pairs-in-string'."
 
 The optional arguments FIXEDCASE and LITERAL is the same as in `replace-match'.
 
-If you want the regex to be case sensitive, set the global
-variable `case-fold-search' to “nil”. Like this: (let ((case-fold-search nil)) (xah-replace-regexp-pairs-region …))"
+If you want the regex to be case sensitive, set the global variable `case-fold-search' to “nil”. Like this: (let ((case-fold-search nil)) (xah-replace-regexp-pairs-region …))"
   (save-restriction
       (narrow-to-region φp1 φp2)
       (mapc
